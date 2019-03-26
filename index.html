@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 
 <head>
@@ -6,17 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Matching Game</title>
   <meta name="description" content="">
-
   <!-- bootstrap css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <!-- link for icons  -->
   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <!-- link for fonts  -->
   <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
   <!-- link for custom css  -->
   <link rel="stylesheet" href="css/app.css">
-  <!-- link for jquery  -->
+  <!-- link for jquery package -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,24 +36,24 @@
     <div class="container-fluid head2">
       <div class="row">
 
-        <!-- col left side -->
-        <div class="col-8 offset-sm-3 col-sm-3 text-center">
-          <section class="score-panel">
-            <ul class="stars">
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-            </ul>
-          </section>
-        </div>
-
-        <!-- col right side -->
-        <div class="col-3 col-sm-3 text-center">
-          <div class="Timer">
-            <i class="fa fa-clock-o" id="Timer">5:00</i>
+          <!-- col left side -->
+          <div class="col-8 offset-sm-3 col-sm-3 text-center">
+            <section class="score-panel">
+              <ul class="stars">
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+              </ul>
+            </section>
           </div>
-        </div>
+
+          <!-- col right side -->
+          <div class="col-3 col-sm-3 text-center">
+            <div class="Timer">
+              <i class="fa fa-clock-o" id="Timer">5:00</i>
+            </div>
+          </div>
 
       </div>
     </div>
@@ -61,40 +62,59 @@
     <div class="container-fluid">
       <div class="row head2">
 
-        <!-- col left side -->
-        <div class="col-8 offset-sm-3 col-sm-3 text-center">
-          <strong>Moves <span class="moves">0</span> </strong>
-        </div>
-
-        <!-- col right side -->
-        <div class="col-3  col-sm-3 text-center">
-          <div class="restart">
-            <i class="fa fa-repeat"></i>
+          <!-- col left side -->
+          <div class="col-8 offset-sm-3 col-sm-3 text-center">
+            <strong>Moves <span class="moves">0</span> </strong>
           </div>
-        </div>
+
+          <!-- col right side -->
+          <div class="col-3  col-sm-3 text-center">
+            <div class="restart">
+              <i class="fa fa-repeat"></i>
+            </div>
+          </div>
 
       </div>
     </div>
-
 
   </header>
 
-  <!-- deck where cards will be -->
+
   <main>
     <div class="container h-100">
       <div class="row justify-content-center">
-        <div class="deck">
-
-
-        </div>
-
-
+          <div class="deck">
+                <!-- deck where cards will be generated -->
+          </div>
       </div>
     </div>
-
-
   </main>
 
+
+<!-- Modal for showen the result -->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+          <div class="modal-header">
+              <h5 class="modal-title" id="resultTitle">  <!-- Modal Title will be generated here  --> </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+
+      <div class="modal-body" id="resultBody">
+            <!-- Modal Body will be generated here  -->
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary restart" >Play Again</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
   <script src="js/app.js"></script>
 </body>

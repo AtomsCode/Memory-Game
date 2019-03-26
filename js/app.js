@@ -1,11 +1,11 @@
 /*
- * Create a divst that holds all of your cards
+ * Create a list that holds all of your cards
  */
 
 
 /*
  * Display the cards on the page
- *   - shuffle the divst of cards using the provided "shuffle" method below
+ *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
@@ -26,7 +26,7 @@ function shuffle(array) {
   return array;
 }
 
-// This array Contain divst of cards used on the game, there is 8 diffret shape each shape repeated twice
+// This array Contain list of cards used on the game, there is 8 diffret shape each shape repeated twice
 let cardlist = [
   'fa fa-diamond', 'fa fa-diamond',
   'fa fa-cube', 'fa fa-cube',
@@ -38,9 +38,8 @@ let cardlist = [
   'fa fa-anchor', 'fa fa-anchor',
 ];
 
-
+// GenerateCard to generate 16 shuffled card dynamic
 function GenerateCard(cards) {
-
 
   let result = null;
   result = '<div class="row">';
@@ -72,17 +71,19 @@ function GenerateCard(cards) {
   return result;
 }
 
-// startGame function will generate the cards in the deck  also shuffle the card and works as Refresh
+startGame();
+
+// startGame function will start the game and run shuffle,GenerateCard Function and setTimer
 function startGame() {
 
   $(function() {
-
+     cardlist = shuffle(cardlist);
     let result = GenerateCard(cardlist);
 
-    $('.deck').children().remove();
+
     $('.deck').append(result);
 
-    // countDownTo value in milliseconds , 1000 = 1 sec
+    // countDownTo value in milliseconds , 1000 = 1 sec , 120000 = 2min
     let countDownTo = 120000;
 
     // Time calculations for remaining minutes and seconds
@@ -95,85 +96,97 @@ function startGame() {
     //Start Timer
     var timer = setInterval(setTimer, 1000);
 
-    function setTimer()
-    {
+    function setTimer() {
 
       countDownTo = countDownTo - 1000;
 
-      // Re calculate Time for remaining minutes and seconds
+      // Recalculate Time for remaining minutes and seconds
       minutes = Math.floor((countDownTo % (1000 * 60 * 60)) / (1000 * 60));
       seconds = Math.floor((countDownTo % (1000 * 60)) / 1000);
 
+      //Display Time for the user after change
       $("#Timer").text(minutes + ":" + seconds)
-      if (countDownTo == 0)
+
+      // if Timer in last minute than change color of timer + make it shaking
+      if (countDownTo <= 60000) {
+        $(".Timer").css("background-image", "linear-gradient(45deg,#ff6749,#a5422e, #ff6749, #ba0101)");
+        $(".Timer").css("animation", ".3s shake infinite alternate");
+      }
+      if (countDownTo <= 0) {
+        $('#resultTitle').html(" Gameover " + '<i class="fa fa-frown-o" aria-hidden="true"></i>');
         clearInterval(timer);
+        $('#resultBody').text("You Couldn't finish in time you made total of " + moves + " moves ");
+        $('#popupModal').modal('show');
+      }
     }
 
+    // To get all cards by class name
+    let cards = document.querySelectorAll(".card");
+    // number of moves in the games
+    let moves = 0;
+    // number of showen cards, max 2 cards
+    var showencards = [];
 
+    $(".card").click(function() {
+      moves++;
+      $(".moves").text(moves);
+      showencards.push($(this).children("i").attr("class"));
 
-  });
+      $(this).addClass('open show');
 
+      if (showencards.length == 2) {
+        $(".deck").css("pointer-events", "none");
 
-}
-startGame();
+        if (showencards[0] == showencards[1]) {
 
-
-// To get all cards class
-let cards = document.querySelectorAll(".card");
-// number of moves in the games
-let moves = 0;
-// number of showen cards, max 2 cards
-var showencards = [];
-
-$(document).ready(function() {
-  $(".card").click(function() {
-    moves++;
-    $(".moves").text(moves);
-    showencards.push($(this).children("i").attr("class"));
-
-    $(this).addClass('open show');
-
-    if (showencards.length == 2) {
-      $(".deck").css("pointer-events", "none");
-
-      if (showencards[0] == showencards[1]) {
-        // alert("==");
-        $(".deck").find(".open.show").addClass("match");
-        $(".deck").find(".open.show").removeClass("open show");
-
-      } else {
-
-        setTimeout(function() {
+          $(".deck").find(".open.show").addClass("match");
           $(".deck").find(".open.show").removeClass("open show");
-          $('.stars li').first().remove();
-        }, 1000);
+
+        } else {
+          setTimeout(function() {
+            $(".deck").find(".open.show").removeClass("open show");
+            $('.stars li').first().remove();
+          }, 500);
+
+        }
+        setTimeout(function() {
+          check();
+          showencards = [];
+          $(".deck").css("pointer-events", "auto");
+        }, 500);
 
       }
-      setTimeout(function() {
-        check();
-        showencards = [];
-        $(".deck").css("pointer-events", "auto");
-      }, 1000);
+
+    });
 
 
+    $(".restart").click(function() {
+      location.reload();
+    });
 
+
+    function check() {
+      if ($(".match").length == 16) {
+
+        let numberStars = "";
+        let stars = $(".stars>li").find("i");
+        if (stars.length >= 1) {
+          for (let i = 0; i < stars.length; ++i) {
+            numberStars = numberStars + stars[i].outerHTML;
+          }
+        } else {
+          numberStars = 0;
+        }
+
+        clearInterval(timer);
+        $('#resultTitle').html(" Congratulations " + '<i class="fa fa-smile-o" aria-hidden="true"></i>');
+        $('#resultBody').html("You finish in " + minutes + ":" + seconds + " you made total of " + moves + " moves " + " you have " + numberStars + " stars ");
+        $('#popupModal').modal('show');
+
+      }
     }
 
-    // alert( "Handler for .cdivck() called."+     $(this).children("i").attr("class") );
+
   });
 
-
-  $(".restart").cdivck(function() {
-    location.reload();
-  });
-
-
-  function check() {
-    if ($(".match").length == 16) {
-      alert("Good Job You did it!");clearInterval(timer);
-    }
-  }
-
-
-
-});
+}

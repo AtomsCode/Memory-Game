@@ -1,139 +1,168 @@
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 /* background taken from url
 https://www.kisspng.com/png-desktop-wallpaper-white-pattern-minimalist-wallpap-5156647/download-png.html
 */
 body {
-    background: #ffffff url('../img/bg6.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+  background: #ffffff url('../img/bg6.png');
+  /* Background pattern from Subtle Patterns */
+  font-family: 'Coda', cursive;
 }
-
-/* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-} */
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* just for test delelte */
-
-.head
-{
-  background: silver;
-  margin-top: 3%;
+.Timer {
+  text-decoration: none;
+  display: inline-block;
+  background-size: 120% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-image: linear-gradient(45deg, #8894dd, #55107A, #EE1361, #EEE800);
 }
 
-.head2
-{
-  opacity: 0.8;
-background: silver;
+@keyframes shake {
+  0% {
+    transform: skewX(-15deg);
+  }
 
+  5% {
+    transform: skewX(15deg);
+  }
+
+  10% {
+    transform: skewX(-15deg);
+  }
+
+  15% {
+    transform: skewX(15deg);
+  }
+
+  20% {
+    transform: skewX(0deg);
+  }
+
+  100% {
+    transform: skewX(0deg);
+  }
 }
-/*  */
-/*  */
-
 
 /*
  * Styles for the deck of cards
  */
-
 .deck {
-
-    background: linear-gradient(160deg, #c53558 0%, #d47aa7 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    margin-top: 1%;
+  background: linear-gradient(160deg, #c53558 0%, #d47aa7 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  margin-top: 1%;
 }
 
 .deck .card {
-    min-height: 110px;
-    min-width: 120px;
+  min-height: 110px;
+  min-width: 120px;
+  background: #2e3d49;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  margin-right: 5px;
+  margin-bottom: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 580px) {
+  .deck .card {
+    min-height: 100px;
+    min-width: 100px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    margin-right: 5px;
-    margin-bottom: 5px;
-
-justify-content: center;
-align-items: center;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 480px) {
   .deck .card {
     min-height: 80px;
     min-width: 60px;
-      background: #2e3d49;
-      font-size: 0;
-      color: #ffffff;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-      margin-right: 2px;
-      margin-bottom: 2px;
-
-      justify-content: center;
-      align-items: center;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    margin-right: 2px;
+    margin-bottom: 2px;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 .deck .card.open {
-    transform: rotateY(0);
-    background: #efc377;
-    cursor: default;
-    pointer-events: none;
+  transform: rotateY(0);
+  background: #efc377;
+  cursor: default;
+  pointer-events: none;
 }
 
 .deck .card.show {
-    font-size: 33px;
+  font-size: 33px;
 }
 
 .deck .card.match {
-    cursor: default;
-    background: #d56f94;
-    font-size: 33px;
-    pointer-events: none;
+  cursor: default;
+  background: #d56f94;
+  font-size: 33px;
+  pointer-events: none;
 }
 
 /*
  * Styles for the Score Panel
  */
-
-
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    color: gold;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  color: gold;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+  list-style: none;
+  display: inline-block;
 }
 
 .score-panel .restart {
-    cursor: pointer;
+  cursor: pointer;
 }
