@@ -38,9 +38,16 @@ h1 {
 
 .head
 {
-  background: red;
+  background: silver;
+  margin-top: 3%;
 }
 
+.head2
+{
+  opacity: 0.8;
+background: silver;
+
+}
 /*  */
 /*  */
 
@@ -50,31 +57,46 @@ h1 {
  */
 
 .deck {
-    width: 35%;
-    min-height: 100%;
+
     background: linear-gradient(160deg, #c53558 0%, #d47aa7 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+    margin-top: 1%;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    min-height: 110px;
+    min-width: 120px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+justify-content: center;
+align-items: center;
+}
+
+@media only screen and (max-width: 420px) {
+  .deck .card {
+    min-height: 80px;
+    min-width: 60px;
+      background: #2e3d49;
+      font-size: 0;
+      color: #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+      margin-right: 2px;
+      margin-bottom: 2px;
+
+      justify-content: center;
+      align-items: center;
+  }
 }
 
 .deck .card.open {
@@ -99,17 +121,11 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
-    /* text-align: left; */
-    width: 50%;
-    margin-bottom: 10px;
-}
 
 .score-panel .stars {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
     color: gold;
 }
 
@@ -119,6 +135,5 @@ h1 {
 }
 
 .score-panel .restart {
-    float: right;
     cursor: pointer;
 }
